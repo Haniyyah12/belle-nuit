@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Belle Nuit</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #e6c9c0;
+    color: #111;
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    display: none;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    z-index: 10;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* ENVELOPE */
+#home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.envelope {
+    width: 320px;
+    height: 220px;
+    background: #f5f1ec;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #f5f1ec;
+    transform-origin: top;
+    transition: transform 1.2s ease;
+}
+
+.open .flap {
+    transform: rotateX(180deg);
+}
+
+.card {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: 1s;
+}
+
+.open .card {
+    opacity: 1;
+}
+
+section {
+    padding: 120px 60px;
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* PRODUCTS GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.card-product {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.card-product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-product img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.details {
+    display: none;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+    background: none;
+    border: 1px solid black;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+/* HEADINGS */
+h1 {
+    text-align: center;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="nav">
+<a onclick="showPage('homePage')">HOME</a>
+<a onclick="showPage('about')">ABOUT</a>
+<a onclick="showPage('products')">PRODUCTS</a>
+<a onclick="showPage('contact')">CONTACT</a>
+</nav>
+
+<!-- ENVELOPE -->
+<div id="home">
+<div class="envelope" onclick="openEnvelope(this)">
+<div class="flap"></div>
+<div class="card">
+<h2>Belle Nuit</h2>
+<p>Click to Open</p>
+</div>
+</div>
+</div>
+
+<section id="homePage">
+<h1>BELLE NUIT</h1>
+<p style="text-align:center;">Luxury Bridal & Intimates</p>
+</section>
+
+<section id="about">
+<h1>ABOUT</h1>
+<p style="max-width:600px; margin:auto; text-align:center;">
+In an oversaturated bridal market, Belle Nuit exists as a refined destination for timeless, intentional design.  
+From pre-wedding moments to the intimacy of the night itself, each piece balances softness, structure, and modern femininity.
+</p>
+</section>
+
+<section id="products">
+<h1>PRODUCTS</h1>
+
+<div class="grid">
+
+<!-- BRIDAL (IN STORE ONLY) -->
+<div class="card-product">
+<img src="images/adelaide.png">
+<h3>Adelaide</h3>
+<p>Wholesale: $140</p>
+<p>Retail: $420</p>
+<p>Available: In Store Only</p>
+<button onclick="toggleDetails(this)">Details</button>
+<div class="details">Corset, silk satin, lace</div>
+</div>
+
+<div class="card-product">
+<img src="images/constance.png">
+<h3>Constance</h3>
+<p>Wholesale: $150</p>
+<p>Retail: $450</p>
+<p>Available: In Store Only</p>
+<button onclick="toggleDetails(this)">Details</button>
+<div class="details">Crepe, lace, illusion tulle</div>
+</div>
+
+<!-- LINGERIE -->
+<div class="card-product">
+<img src="images/iris.png">
+<h3>Iris</h3>
+<p>Wholesale: $40</p>
+<p>Retail: $120</p>
+<p>Available: In Store & Online</p>
+<p>Sizes: XS–XL</p>
+<button onclick="toggleDetails(this)">Details</button>
+<div class="details">Lace lingerie set</div>
+</div>
+
+<!-- SLEEPWEAR -->
+<div class="card-product">
+<img src="images/aurore.png">
+<h3>Aurore</h3>
+<p>Wholesale: $65</p>
+<p>Retail: $200</p>
+<p>Available: In Store & Online</p>
+<p>Sizes: S–L</p>
+<button onclick="toggleDetails(this)">Details</button>
+<div class="details">Silk blend sleepwear</div>
+</div>
+
+</div>
+</section>
+
+<section id="contact">
+<h1>CONTACT</h1>
+<p style="text-align:center;">
+Email: bellenuit@gmail.com<br>
+Montclair, NJ
+</p>
+</section>
+
+<script>
+function openEnvelope(el) {
+    el.classList.add("open");
+
+    setTimeout(() => {
+        document.getElementById("home").style.display = "none";
+        document.getElementById("homePage").classList.add("active");
+        document.getElementById("nav").style.display = "flex";
+    }, 1200);
+}
+
+function showPage(page) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(page).classList.add("active");
+}
+
+function toggleDetails(btn) {
+    let details = btn.nextElementSibling;
+    details.style.display = details.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
